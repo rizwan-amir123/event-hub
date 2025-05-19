@@ -1,0 +1,35 @@
+.shared-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    border-bottom: 1px solid #ddd;
+}
+
+.shared-header-logo {
+    height: 40px;
+    cursor: pointer;
+}
+
+.shared-header-logout {
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #fff;
+    background-image: linear-gradient(to right, #8b5cf6, #3b82f6);
+    border-radius: 0.375rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+}
+
+.shared-header-logout:hover {
+    background-image: linear-gradient(to right, #7e22ce, #2563eb);
+    transform: scale(1.05);
+}
+

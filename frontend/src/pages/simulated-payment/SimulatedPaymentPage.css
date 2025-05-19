@@ -1,0 +1,27 @@
+.payment-page {
+    padding: 2rem;
+    background: linear-gradient(180deg, #0f172a 0%, #5b21b6 50%, #000000 100%);
+    min-height: 100vh;
+}
+
+.payment-card-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 1rem;
+}
+
+.payment-card {
+    width: 100%;
+    max-width: 400px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 0.75rem;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.2), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+    padding: 2rem;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-top-width: 1px;
+    border-left-width: 1px;
+}
+

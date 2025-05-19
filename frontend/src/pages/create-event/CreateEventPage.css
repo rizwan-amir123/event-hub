@@ -1,0 +1,33 @@
+.create-event-page {
+    padding: 2rem;
+    background: linear-gradient(180deg, #0f172a 0%, #5b21b6 50%, #000000 100%);
+    min-height: 100vh;
+}
+
+.create-event-form-container {
+    max-width: 800px;
+    margin-left: 0;
+}
+
+
+.create-event-not-authorized {
+    text-align: center;
+    background-color: #fff;
+    padding: 2rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.not-authorized-title {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #dc2626;
+    margin-bottom: 1rem;
+}
+
+.not-authorized-description {
+    font-size: 1.125rem;
+    color: #4b5563;
+    margin-bottom: 1.5rem;
+}
+
