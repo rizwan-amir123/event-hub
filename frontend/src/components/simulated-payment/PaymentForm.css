@@ -45,6 +45,11 @@
     text-align: center;
 }
 
+.form-button-container {
+    display: flex;
+    justify-content: center;
+}
+
 .form-submit-button {
     padding: 0.75rem 1rem;
     font-size: 1rem;

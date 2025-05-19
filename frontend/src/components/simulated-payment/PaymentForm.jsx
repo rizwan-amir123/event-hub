@@ -51,9 +51,11 @@ const PaymentForm = ({
             </div>
 
             {error && <div className="form-error">{error}</div>}
-            <button type="submit" className="form-submit-button" disabled={loading}>
-                {loading ? 'Processing...' : 'Pay Now'}
-            </button>
+            <div className="form-button-container">
+		          <button type="submit" className="form-submit-button" disabled={loading}>
+		              {loading ? 'Processing...' : 'Pay Now'}
+		          </button>
+            </div>
         </form>
     );
 };

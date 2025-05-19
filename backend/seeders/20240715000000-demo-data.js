@@ -37,6 +37,15 @@ module.exports = {
           updatedAt: new Date(),
         },
         {
+          name: 'Jill Smith',
+          email: 'jill.smith@example.com',
+          password_hash: hashedPassword,
+          role: 'admin',
+          tenant_id: tenants[1].id,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
           name: 'Admin User',
           email: 'admin@example.com',
           password_hash: hashedPassword,
@@ -85,7 +94,7 @@ module.exports = {
         {
           event_id: events[1].id,
           user_id: users[1].id,
-          status: 'pending',
+          status: 'confirmed',
           createdAt: new Date(),
           updatedAt: new Date(),
         },
