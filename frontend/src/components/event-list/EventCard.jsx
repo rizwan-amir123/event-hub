@@ -54,10 +54,7 @@ const EventCard = ({ event, userId }) => {
 												Register
 										</button>
 								</Link>
-						) : null}
-						
-						
-            
+						) : null}           
         </div>
     );
 };

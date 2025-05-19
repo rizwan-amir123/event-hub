@@ -79,9 +79,8 @@ const eventService = {
 				    throw error;
 				}
 		},
-
-
-     /**
+		
+    /**
      * Retrieves a single event by ID.
      * @param {number} eventId - The ID of the event.
      * @returns {Promise<Event>} - A promise that resolves to the event.
@@ -94,7 +93,6 @@ const eventService = {
         }
         return event;
     },
-
     /**
      * Registers a user for an event.
      * @param {number} eventId - The ID of the event.
@@ -155,58 +153,7 @@ const eventService = {
 				    await transaction.rollback();
 				    throw createError(404, 'Failed to register user for the event.');
 				}
-		},
-
-    /**
-     * Retrieves a registration by its ID.
-     * @param {number} registrationId - The ID of the registration.
-     * @returns {Promise<Registration>} - A promise that resolves to the registration.
-     * @throws {Error} - Throws an error if the registration is not found.
-     */
-    getRegistrationById: async (registrationId) => {
-        const registration = await Registration.findByPk(registrationId, {
-            include: [
-                {
-                    model: Event,
-                    as: 'event',
-                    attributes: ['id', 'title', 'description', 'start_time', 'end_time', 'capacity', 'price', 'tenant_id']
-                },
-                {
-                    model: User,
-                    as: 'user',
-                    attributes: ['id', 'name', 'email', 'role', 'tenant_id']
-                }
-            ],
-            attributes: ['id', 'event_id', 'user_id', 'status', 'createdAt', 'updatedAt']
-        });
-
-        if (!registration) {
-            throw createError(404, 'Registration not found');
-        }
-        return registration;
-    },
-      /**
-     * Retrieves a user by their ID.
-     * @param {number} userId - The ID of the user.
-     * @returns {Promise<User>} - A promise that resolves to the user.
-     * @throws {Error} - Throws an error if the user is not found.
-     */
-    getUserById: async (userId) => {
-        const user = await User.findByPk(userId, {
-            include: [
-                {
-                    model: Tenant,
-                    as: 'tenant',
-                    attributes: ['id', 'name']
-                }],
-            attributes: ['id', 'name', 'email', 'role', 'tenant_id']
-        });
-
-        if (!user) {
-            throw createError(404, 'User not found');
-        }
-        return user;
-    }
+		}    
 };
 
 module.exports = eventService;

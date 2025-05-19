@@ -18,8 +18,7 @@ const EventListHeader = () => {
 						</div>
 						<p className="event-list-description">
 								Explore a variety of exciting events.
-						</p>
-            
+						</p>            
         </div>
     );
 };

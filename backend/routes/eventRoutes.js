@@ -1,13 +1,13 @@
 const express = require('express');
 const router = express.Router();
 const eventController = require('../controllers/eventController');
-const { authenticate, isAdmin, tenantGuard } = require('../middleware/authMiddleware'); // Import the middleware
+const { authenticate, isAdmin, tenantGuard } = require('../middleware/authMiddleware'); 
 
 // Define routes
 router.get('/events', authenticate, eventController.getAllEvents);
-router.get('/events/:eventId', authenticate, tenantGuard('event'), eventController.getEventById); // Added tenantGuard
 router.post('/events', authenticate, isAdmin, eventController.createEvent); // Admin-only route
-router.post('/register/:eventId', authenticate, tenantGuard('event'), eventController.registerForEvent); // Added tenantGuard
-router.get('/registrations/:registrationId', authenticate, tenantGuard('registration'), eventController.getRegistration);
-router.get('/users/:id', authenticate, tenantGuard('user'), eventController.getUser);
+router.post('/register/:eventId', authenticate, tenantGuard('event'), eventController.registerForEvent); 
+
 module.exports = router;
+
+

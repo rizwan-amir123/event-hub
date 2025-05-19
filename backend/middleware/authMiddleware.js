@@ -1,8 +1,5 @@
-// backend/middleware/authMiddleware.js
 const jwt = require('jsonwebtoken');
-const User = require('../models/user'); // Import your User model
-const Tenant = require('../models/tenant'); // Import your Tenant model
-// const createError = require('http-errors'); // Removed http-errors
+const { Tenant, User } = require('../models');
 
 const authMiddleware = {
     /**
@@ -14,8 +11,7 @@ const authMiddleware = {
             // 1. Get the token from the header
             const authHeader = req.headers.authorization;
             if (!authHeader || !authHeader.startsWith('Bearer ')) {
-                // return res.status(401).json({ message: 'Authentication required' }); // Basic
-                return res.status(401).json({ message: 'Authentication required' }); // Using standard Express
+                return res.status(401).json({ message: 'Authentication required' }); 
             }
 
             const token = authHeader.split(' ')[1];
@@ -23,35 +19,24 @@ const authMiddleware = {
             // 2. Verify the token
             try {
                 const decoded = jwt.verify(token, process.env.JWT_SECRET);
-                req.user = decoded; // Attach the decoded user info to the request.
+                req.user = decoded; 
             } catch (err) {
-                // Token is invalid
-                // return res.status(401).json({ message: 'Invalid token' });  // Basic
-                return res.status(401).json({ message: 'Invalid token' }); // Using standard Express
+                return res.status(401).json({ message: 'Invalid token' }); 
             }
             
             // 3.  Fetch the user from the database and attach to the request
-            const user = await User.findByPk(req.user.id
-            		//, {
-                //include: [{
-                //    model: Tenant,
-                //    as: 'tenant' //  Important: Use the alias defined in the association
-                //}]
-            //}
-            );
+            const user = await User.findByPk(req.user.id);
 
             if (!user) {
-                // return res.status(401).json({ message: 'User not found' }); // Basic
-                return res.status(401).json({ message: 'User not found' }); // Using standard Express
+                return res.status(401).json({ message: 'User not found' }); 
             }
-            req.user = user; // Override with the full user object from the database, including tenant
+            req.user = user; 
             next();
 
         } catch (error) {
             //  Catch any unexpected errors
             console.error(error);
-            return res.status(500).json({ message: 'Server error' }); // Using standard Express
-            // next(error); // Pass to your error handler // Removed:  No longer using http-errors
+            return res.status(500).json({ message: 'Server error' }); 
         }
     },
 
@@ -61,7 +46,6 @@ const authMiddleware = {
      */
     isAdmin: (req, res, next) => {
         if (!req.user || req.user.role !== 'admin') {
-            // return res.status(403).json({ message: 'Unauthorized' }); // Basic
             return res.status(403).json({ message: 'Unauthorized. Admin role required' }); // Using standard Express
         }
         next();
@@ -83,11 +67,11 @@ const authMiddleware = {
 
                 let resourceTenantId;
                 if (resourceType === 'event') {
-                    const { Event } = require('../models');  // Import inside the middleware to avoid circular dependencies
-                    const eventId = req.params.eventId || req.body.event_id; // Adjust parameter name as needed
-                    const event = await Event.findByPk(eventId); //  eventId
+                    const { Event } = require('../models');  
+                    const eventId = req.params.eventId || req.body.event_id; 
+                    const event = await Event.findByPk(eventId); 
                     if (!event) {
-                        return res.status(404).json({ message: 'Event not found' }); // Using standard Express
+                        return res.status(404).json({ message: 'Event not found' }); 
                     }
                     resourceTenantId = event.tenant_id;
                 } else if (resourceType === 'registration') {
@@ -100,27 +84,26 @@ const authMiddleware = {
                         }
                     });
                     if (!registration) {
-                         return res.status(404).json({ message: 'Registration not found' }); // Using standard Express
+                         return res.status(404).json({ message: 'Registration not found' }); 
                     }
                     resourceTenantId = registration.event.tenant_id;
                 } else if (resourceType === 'user') {
                     //For user routes,
                     const { id } = req.params;
                     if(req.user.id !== Number(id)){
-                         return res.status(403).json({ message: 'Unauthorized. User can only access their own data.' }); // Using standard Express
+                         return res.status(403).json({ message: 'Unauthorized. User can only access their own data.' }); 
                     }
                     resourceTenantId = req.user.tenant_id
                 }
                 // Add more resource types as needed (e.g., 'order', 'product')
 
                 if (userTenantId !== resourceTenantId) {
-                      return res.status(403).json({ message: `Unauthorized.  User's tenant does not match the ${resourceType}'s tenant.` }); // Using standard Express
+                      return res.status(403).json({ message: `Unauthorized.  User's tenant does not match the ${resourceType}'s tenant.` }); 
                 }
                 next();
             } catch (error) {
                 console.error(error);
-                return res.status(500).json({ message: 'Server error' }); // Using standard Express
-                // next(error); // Removed:  No longer using http-errors
+                return res.status(500).json({ message: 'Server error' }); 
             }
         };
     },

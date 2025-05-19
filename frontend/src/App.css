@@ -20,12 +20,4 @@ code {
   flex-direction: column;
 }
 
-/* You might not need this if you have specific layout containers in your components */
-/* .main-content {
-  flex: 1;  
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-} */
 

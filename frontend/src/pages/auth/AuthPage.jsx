@@ -8,8 +8,8 @@ import AuthFooter from '../../components/auth/AuthFooter';
 import './AuthPage.css';
 
 const AuthPage = () => {
-    const [isLogin, setIsLogin] = useState(true); // State to toggle between Login and Register
-    const { login, register, error, loading } = useContext(AuthContext); // Use context for auth
+    const [isLogin, setIsLogin] = useState(true); 
+    const { login, register, error, loading } = useContext(AuthContext); 
     const [name, setName] = useState('');
     const [tenantName, setTenantName] = useState('');
     const [email, setEmail] = useState('');
@@ -19,7 +19,7 @@ const AuthPage = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        setLocalError(null); // Clear previous errors
+        setLocalError(null); 
 
         try {
             if (isLogin) {
@@ -51,7 +51,7 @@ const AuthPage = () => {
                     tenantName={tenantName}
                     setTenantName={setTenantName}
                     onSubmit={handleSubmit}
-                    error={localError || error} // Show local or context error
+                    error={localError || error} 
                     loading={loading}
                 />
                 <AuthFooter isLogin={isLogin} onToggle={() => setIsLogin(!isLogin)} />

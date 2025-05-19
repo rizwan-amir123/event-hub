@@ -21,19 +21,11 @@ const SimulatedPaymentPage = () => {
         setLoading(true);
         setError(null);
 
-        // Simulate payment processing
         try {
-            // Replace this with your actual payment processing logic (e.g., Stripe, PayPal)
-            //await new Promise(resolve => setTimeout(resolve, 2000)); // Simulate a 2-second delay
-
-            // In a real application, you would send the payment details to your server
-            // and get a response indicating success or failure.  For this simulation,
-            // we'll just assume success if the card details are not empty.
             if (cardNumber && expiryDate && cvv) {
                 // Payment successful
                 const response = await registerForEvent(eventId);
-                if (response.status === 200) {
-                	console.log('success.')
+                if (response.status === 201) {
                 	navigate('/events'); // Redirect to a success page
             		} 
                 

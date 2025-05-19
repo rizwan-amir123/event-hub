@@ -1,19 +1,19 @@
 import { useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
-import { AuthContext } from '../../context/authContext';  // <-- update the path accordingly
+import { AuthContext } from '../../context/authContext'; 
 import './SharedHeader.css';
 import logo from '/logo.png';
 
 const SharedHeader = () => {
     const navigate = useNavigate();
-    const { logout } = useContext(AuthContext);  // Get logout from context
+    const { logout } = useContext(AuthContext);  
 
     const handleLogoClick = () => {
         navigate('/events');
     };
 
     const handleLogout = () => {
-        logout();  // Call logout from AuthContext
+        logout();  
     };
 
     return (
